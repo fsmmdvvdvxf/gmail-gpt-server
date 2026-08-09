@@ -1,0 +1,455 @@
+<title>MSF Motorcycle Practice Test — 50 Questions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#efece3; --surface:#fffdf8; --surface-2:#f5f1e8; --line:#e0dccf;
+    --ink:#1e2126; --muted:#5f646c; --faint:#8b9098;
+    --amber:#c07d00; --amber-2:#a86c00; --amber-ink:#4a3400;
+    --asphalt:#23262a;
+    --good:#2f7d52; --good-bg:#e6f2ea; --good-line:#bfe0cc;
+    --bad:#c0402c; --bad-bg:#f8e9e5; --bad-line:#f0cabf;
+    --shadow:0 1px 2px rgba(30,33,38,.06), 0 8px 24px rgba(30,33,38,.07);
+    --radius:14px;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#131518; --surface:#1c1f24; --surface-2:#22262c; --line:#31353c;
+      --ink:#ecebe6; --muted:#a3a9b2; --faint:#767c85;
+      --amber:#f2a53a; --amber-2:#ffbb52; --amber-ink:#1a1305;
+      --asphalt:#0e1012;
+      --good:#5cc088; --good-bg:#16261d; --good-line:#274a35;
+      --bad:#ee7259; --bad-bg:#2a1712; --bad-line:#4a271d;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#131518; --surface:#1c1f24; --surface-2:#22262c; --line:#31353c;
+    --ink:#ecebe6; --muted:#a3a9b2; --faint:#767c85;
+    --amber:#f2a53a; --amber-2:#ffbb52; --amber-ink:#1a1305;
+    --asphalt:#0e1012;
+    --good:#5cc088; --good-bg:#16261d; --good-line:#274a35;
+    --bad:#ee7259; --bad-bg:#2a1712; --bad-line:#4a271d;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); line-height:1.55; font-size:17px;
+    padding:24px 16px 64px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto}
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--amber-2);font-weight:700;margin:0 0 6px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:"";width:22px;height:3px;background:var(--amber);border-radius:2px}
+  h1{font-size:clamp(28px,6vw,40px);line-height:1.04;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
+  .lede{color:var(--muted);margin:0 0 26px;font-size:17px;max-width:60ch}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+  /* start screen */
+  .hero{padding:30px 26px 26px}
+  .plate{
+    background:var(--asphalt);color:#f7f4ec;border-radius:12px;
+    padding:20px 22px;margin:0 0 24px;border:2px solid rgba(255,255,255,.08);
+    display:flex;gap:20px;flex-wrap:wrap;
+  }
+  .plate .stat{flex:1;min-width:120px}
+  .plate .num{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--amber-2);font-variant-numeric:tabular-nums}
+  .plate .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#b7bcc4;margin-top:7px}
+  .modes{display:flex;flex-direction:column;gap:12px;margin:0 0 24px}
+  .opt-row{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2);cursor:pointer;user-select:none}
+  .opt-row input{margin-top:4px;accent-color:var(--amber);width:17px;height:17px;flex:none}
+  .opt-row .t{font-weight:600}
+  .opt-row .d{color:var(--muted);font-size:14px;margin-top:2px}
+
+  .btn{
+    appearance:none;border:0;cursor:pointer;font-family:var(--sans);
+    font-weight:700;font-size:16px;border-radius:11px;padding:14px 22px;
+    background:var(--amber);color:var(--amber-ink);transition:transform .05s ease, filter .15s ease;
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  }
+  .btn:hover{filter:brightness(1.05)}
+  .btn:active{transform:translateY(1px)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn.block{width:100%}
+  .btn:focus-visible,.opt:focus-visible,.opt-row:focus-visible,.chip:focus-visible,.fcard:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+  .tabs{display:flex;gap:8px;margin:0 0 20px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:9px 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+  .chip[aria-selected="true"]{background:var(--asphalt);color:#f7f4ec;border-color:var(--asphalt)}
+
+  /* progress */
+  .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 14px}
+  .count{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:600}
+  .count b{color:var(--ink)}
+  .score-mini{font-family:var(--mono);font-size:13px;color:var(--good);font-weight:700;font-variant-numeric:tabular-nums}
+  .bar{height:8px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:0 0 22px}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--amber-2));transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+  .q{padding:26px 24px 22px}
+  .qtag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-2);font-weight:700;margin:0 0 9px}
+  .qtext{font-size:21px;font-weight:700;letter-spacing:-.01em;line-height:1.3;margin:0 0 20px;text-wrap:balance}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{
+    text-align:left;font-family:var(--sans);font-size:16.5px;color:var(--ink);
+    background:var(--surface-2);border:1.5px solid var(--line);border-radius:11px;
+    padding:14px 15px;cursor:pointer;display:flex;gap:13px;align-items:flex-start;
+    transition:border-color .12s ease, background .12s ease;
+  }
+  .opt:hover:not(:disabled){border-color:var(--amber)}
+  .opt:disabled{cursor:default}
+  .opt .key{font-family:var(--mono);font-weight:800;font-size:13px;color:var(--muted);border:1.5px solid var(--line);border-radius:7px;width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center;margin-top:-1px}
+  .opt.correct{background:var(--good-bg);border-color:var(--good-line)}
+  .opt.correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-line)}
+  .opt.wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+  .opt.dim{opacity:.6}
+
+  .explain{margin:16px 0 0;padding:14px 16px;border-radius:11px;background:var(--surface-2);border:1px solid var(--line);font-size:15px;color:var(--muted);display:none}
+  .explain.show{display:block}
+  .explain b{color:var(--ink)}
+  .explain .verdict{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:5px}
+  .explain.ok .verdict{color:var(--good)} .explain.no .verdict{color:var(--bad)}
+
+  .nav{display:flex;justify-content:space-between;gap:12px;margin:22px 0 0}
+
+  /* results */
+  .result{padding:32px 26px;text-align:center}
+  .ring{width:180px;height:180px;margin:6px auto 18px;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .pct b{font-size:44px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+  .ring .pct span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .verdict-big{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:0 0 6px}
+  .verdict-big.pass{color:var(--good)} .verdict-big.fail{color:var(--bad)}
+  .result p{color:var(--muted);margin:0 auto 22px;max-width:44ch}
+  .result .btn{margin:0 6px 10px}
+
+  .review{margin:26px 0 0;text-align:left}
+  .review h3{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-2);margin:0 0 12px}
+  .rev-item{padding:14px 16px;border:1px solid var(--bad-line);background:var(--bad-bg);border-radius:11px;margin:0 0 10px}
+  .rev-item .rq{font-weight:700;margin:0 0 8px;font-size:15.5px}
+  .rev-item .ra{font-size:14.5px;margin:2px 0;color:var(--muted)}
+  .rev-item .ra b{color:var(--ink)}
+  .rev-item .ra.you{color:var(--bad)} .rev-item .ra.corr{color:var(--good)}
+
+  /* flashcards */
+  .fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .fcard{
+    perspective:1000px;background:none;border:0;padding:0;cursor:pointer;height:150px;font-family:var(--sans);
+  }
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .fcard[aria-pressed="true"] .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;text-align:center}
+  .fc-front{background:var(--asphalt);color:#f7f4ec}
+  .fc-front .term{font-size:24px;font-weight:800;letter-spacing:-.01em;color:var(--amber-2)}
+  .fc-front .hint{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#b7bcc4;margin-top:8px}
+  .fc-back{background:var(--surface);color:var(--ink);transform:rotateY(180deg);font-size:14px;line-height:1.4}
+  .fc-back b{color:var(--amber-2)}
+
+  .foot{color:var(--faint);font-size:12.5px;margin:26px 2px 0;line-height:1.5;text-align:center}
+  .themebtn{position:fixed;top:14px;right:14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;background:var(--surface);color:var(--muted);border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;z-index:10}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:520px){body{font-size:16px}.hero,.q,.result{padding-left:18px;padding-right:18px}}
+</style>
+
+<button class="themebtn" id="themeBtn" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<div class="wrap">
+  <p class="eyebrow">SIUE Rider Program · MSF Written Test</p>
+  <h1>Motorcycle Practice Test</h1>
+  <p class="lede">Fifty plain-English questions on the same material the real Motorcycle Safety Foundation written test covers. It grades itself, tells you why each answer is right, and flips flash cards for the tricky acronyms. Pass line is <b style="color:var(--ink)">80% — 40 of 50</b>.</p>
+
+  <!-- START -->
+  <section id="start" class="card hero">
+    <div class="plate">
+      <div class="stat"><div class="num">50</div><div class="lab">Questions</div></div>
+      <div class="stat"><div class="num">40</div><div class="lab">Needed to pass</div></div>
+      <div class="stat"><div class="num">4</div><div class="lab">Acronym cards</div></div>
+    </div>
+    <div class="modes" role="radiogroup" aria-label="Test options">
+      <label class="opt-row"><input type="radio" name="mode" value="instant" checked>
+        <span><span class="t">Learn mode</span><span class="d">Grade each question the moment you answer, with a short explanation. Best for studying.</span></span></label>
+      <label class="opt-row"><input type="radio" name="mode" value="exam">
+        <span><span class="t">Exam mode</span><span class="d">No feedback until the end — just like the real test. See your full score and misses after Q50.</span></span></label>
+      <label class="opt-row"><input type="checkbox" id="shuffle" checked>
+        <span><span class="t">Shuffle</span><span class="d">Randomize the order of questions and answers each attempt.</span></span></label>
+    </div>
+    <button class="btn block" id="startBtn">▶ Start the 50-question test</button>
+    <div style="text-align:center;margin-top:14px">
+      <button class="chip" id="toFlash" style="border-style:dashed">📇 Just show me the flash cards</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="card q" hidden>
+    <div class="top">
+      <span class="count">Question <b id="qNow">1</b> / <span id="qTot">50</span></span>
+      <span class="score-mini" id="scoreMini"></span>
+    </div>
+    <div class="bar"><i id="barFill"></i></div>
+    <p class="qtag" id="qTag">Question 1</p>
+    <p class="qtext" id="qText">…</p>
+    <div class="opts" id="opts"></div>
+    <div class="explain" id="explain"><span class="verdict"></span><span id="explainText"></span></div>
+    <div class="nav">
+      <button class="btn ghost" id="prevBtn">← Back</button>
+      <button class="btn" id="nextBtn" disabled>Next →</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="card result" hidden>
+    <div class="ring">
+      <svg width="180" height="180" viewBox="0 0 180 180">
+        <circle cx="90" cy="90" r="78" fill="none" stroke="var(--line)" stroke-width="14"></circle>
+        <circle id="ringArc" cx="90" cy="90" r="78" fill="none" stroke="var(--amber)" stroke-width="14" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490"></circle>
+      </svg>
+      <div class="pct"><b id="rPct">0%</b><span id="rFrac">0 / 50</span></div>
+    </div>
+    <div class="verdict-big" id="rVerdict">—</div>
+    <p id="rMsg"></p>
+    <div>
+      <button class="btn" id="retryBtn">↻ Retake test</button>
+      <button class="btn ghost" id="reviewFlashBtn">📇 Flash cards</button>
+    </div>
+    <div class="review" id="review" hidden>
+      <h3 id="reviewHead">Review your misses</h3>
+      <div id="reviewList"></div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="flash" class="card q" hidden>
+    <div class="top"><span class="count">📇 Acronym flash cards</span></div>
+    <p class="lede" style="margin-bottom:18px">Tap a card to flip it. These four acronyms show up all over the test.</p>
+    <div class="fc-grid" id="fcGrid"></div>
+    <div class="nav" style="justify-content:flex-end"><button class="btn" id="flashBack">← Back to start</button></div>
+  </section>
+
+  <p class="foot">Plain-English practice on the facts the real exam covers — not a copy of the official test. Always follow your instructor and the state rider handbook. Front brake ≈ 70% · Look 12 s ahead · Follow ≥ 2 s.</p>
+</div>
+
+<script>
+const QUESTIONS = [
+  {q:"What does the SEE strategy tell you to do?",o:["Search, Evaluate, Execute — spot hazards, think what could go wrong, then act","Stop, Exit, Enter","Speed up on empty roads","Watch only the car directly ahead"],a:0,e:"SEE = Search, Evaluate, Execute: a constant loop of finding hazards, judging them, and doing something about them."},
+  {q:"What is the minimum following distance behind the vehicle ahead?",o:["Half a second","At least 2 seconds","One car length at any speed","Close enough to draft"],a:1,e:"Keep at least a 2-second gap — and stretch it to 4+ seconds in rain, at night, or when tired."},
+  {q:"To turn the motorcycle at speed, you mainly:",o:["Turn the bars like a car steering wheel","Press the grip on the side you want to go (countersteer)","Lean opposite the turn","Just shift your body weight"],a:1,e:"Countersteering: press the right grip to go right, the left grip to go left. Press right, lean right, go right."},
+  {q:"Which brake provides most of your stopping power?",o:["The rear brake","The front brake (about 70%)","Engine braking only","Both give exactly the same"],a:1,e:"The front brake supplies roughly 70% of stopping power because weight shifts forward when you slow."},
+  {q:"The best way to make a quick, safe stop is to:",o:["Use the rear brake only","Apply both brakes fully without locking either wheel, bike straight up","Slam the front brake hard","Just roll off the throttle and coast"],a:1,e:"Use both brakes firmly to the point just short of lock-up, with the bike upright and wheels tracking straight."},
+  {q:"The correct order for taking a curve is:",o:["Look, gas, brake, turn","Slow, Look, Press, Roll","Press, slow, coast, look","Roll, slow, lean, brake"],a:1,e:"Slow to an entry speed, Look through the turn, Press to lean, then Roll on the throttle to stabilize."},
+  {q:"When should you slow down for a curve?",o:["In the middle of the curve","Before you enter it","After you exit it","Speed doesn't matter in curves"],a:1,e:"Set your entry speed BEFORE the curve. Braking hard mid-curve reduces the traction you need to lean."},
+  {q:"How far ahead should you keep your eyes scanning?",o:["Just past your front tire","About 12 seconds up the road","On the speedometer","One block, then look down"],a:1,e:"Keep a 12-second visual lead so you spot hazards early and have time to react."},
+  {q:"The most common car-vs-motorcycle crash is:",o:["Being rear-ended at a light","An oncoming car turning left across your path","Hitting a parked car","Sliding out on gravel"],a:1,e:"A car turning left in front of you at an intersection is the classic — and most common — collision. Intersections are the highest-risk spots."},
+  {q:"To swerve around a sudden obstacle, you should:",o:["Brake hard and steer around at the same time","Press to steer around it, then brake separately if needed","Lean back and coast through it","Close the throttle and stiffen up"],a:1,e:"Never brake and swerve at the same time — traction can't do both. Swerve first, then brake, or brake then swerve."},
+  {q:"Alcohol affects which riding ability first?",o:["Grip strength","Judgment","Hearing","Nothing until you're very drunk"],a:1,e:"Judgment goes first — before you feel obviously impaired — which is exactly what a rider can't afford to lose."},
+  {q:"The road surface is most slippery:",o:["After it has rained for hours","Right when rain first begins","Only when there's visible ice","On dry, sunny days"],a:1,e:"When rain starts it lifts oil and dust into a slick film. It's most treacherous in the first few minutes."},
+  {q:"When crossing railroad tracks, bumps, or an object you can't avoid:",o:["Hit them at a shallow angle","Cross as close to a 90° angle as safe, rise slightly off the seat, keep straight","Speed up and jump it","Brake right on top of it"],a:1,e:"Cross straight on (near 90°), stay straight, and lift slightly off the seat to absorb the bump."},
+  {q:"If your motorcycle begins to wobble (a 'tank slapper'), you should:",o:["Slam on the brakes","Chop the throttle closed fast","Ease off the throttle gradually, grip firmly, keep straight, don't fight it","Accelerate hard to ride it out"],a:2,e:"Roll off the throttle slowly and hold on. Braking or chopping the gas can make a wobble worse."},
+  {q:"The best all-around protective gear is:",o:["A DOT helmet, eye protection, over-the-ankle boots, gloves, jacket, and long pants","Just a helmet","Shorts and sneakers on hot days","Sunglasses only"],a:0,e:"Full coverage — DOT helmet, eye protection, sturdy boots, gloves, jacket, long pants — ideally in bright/reflective colors."},
+  {q:"T-CLOCS is a memory aid for:",o:["A pre-ride inspection: Tires, Controls, Lights, Oil, Chassis, Stands","The steps to start the engine","How to take a curve","Group-riding formation"],a:0,e:"T-CLOCS = Tires & wheels, Controls, Lights & electrics, Oil & fluids, Chassis, Stands — your pre-ride check."},
+  {q:"FINE-C is the memory aid for:",o:["Choosing a lane position","Starting the engine: Fuel, Ignition, Neutral, Engine cut-off, Choke/Clutch","Emergency braking","Passing another vehicle"],a:1,e:"FINE-C = Fuel valve on, Ignition on, Neutral, Engine cut-off switch to run, Choke/Clutch — the engine-start sequence."},
+  {q:"The 'friction zone' is:",o:["The part of the road with the most grip","The range of clutch travel where the engine begins to move the bike","The gap between you and the next car","Where your tires meet the pavement"],a:1,e:"The friction zone is the clutch-lever range where power starts reaching the rear wheel — key for slow, smooth control."},
+  {q:"You should replace your helmet:",o:["Every 10 years no matter what","After any crash or hard drop, or per the maker's date","Only if it cracks visibly","Never, if it looks fine"],a:1,e:"Replace a helmet after any impact — damage is often invisible — and follow the manufacturer's age guidance (about 5 years)."},
+  {q:"How many lane positions does a single lane offer a rider?",o:["One — always ride the center","Two — left and right only","Three — left, center, and right","As many as you like, weaving"],a:2,e:"Think of three positions (1 left, 2 center, 3 right). Move among them for visibility, space, and to avoid surface hazards."},
+  {q:"Which part of the lane most often collects oil and grease?",o:["The left third","The center strip, where cars drip","The right third","The painted lines"],a:1,e:"Fluids drip from cars onto the center of the lane, so it can be the slickest — especially when wet."},
+  {q:"The proper group-riding formation on an open road is:",o:["Single file, tight","A staggered formation","Side by side, two abreast","No formation — spread out randomly"],a:1,e:"Staggered formation keeps a space cushion around each rider while keeping the group compact. Go single-file in curves and tight spots."},
+  {q:"Most single-vehicle (solo) motorcycle crashes are caused by:",o:["Mechanical failure","Entering a curve too fast","Running out of fuel","Loud exhaust"],a:1,e:"Too much speed entering a curve is the leading cause of solo crashes — riders often brake and run wide instead of leaning more."},
+  {q:"About how often is alcohol a factor in fatal motorcycle crashes?",o:["Almost never","Roughly 4 out of 10","Every crash","Only at night"],a:1,e:"Alcohol is involved in about 40% of deadly motorcycle crashes. It impairs judgment, balance, and reaction time."},
+  {q:"Riding while fatigued is:",o:["No different from being rested","Nearly as impairing as riding drunk","Fine if you drink coffee","Only a problem on long trips"],a:1,e:"Fatigue dulls judgment and reaction much like alcohol. Rest before you ride and take breaks."},
+  {q:"The single most effective habit for being seen by other drivers is:",o:["Riding faster than traffic","Using lane position, bright/reflective gear, and your headlight to stay visible","Staying in drivers' blind spots","Weaving between lanes"],a:1,e:"Be conspicuous: pick a lane position where drivers can see you, wear bright gear, keep the headlight on, and assume you're unseen."},
+  {q:"If you must brake while already leaned in a curve, you should:",o:["Grab the front brake hard","Gradually straighten the bike more upright, then brake","Only use the rear brake and keep leaning","Let go of both brakes"],a:1,e:"A leaned tire has little grip to spare. Ease the bike upright to trade lean for braking traction, then brake."},
+  {q:"If your front tire skids under braking, you should:",o:["Keep squeezing harder","Instantly release the front brake, then re-apply smoothly","Add rear brake to compensate","Steer sharply"],a:1,e:"Release the front brake the moment it skids to regain grip, then re-apply more gently."},
+  {q:"If your REAR tire locks and the back end slides out of line, you should:",o:["Release the rear brake instantly","Keep the rear brake locked until you've stopped or slowed to very low speed","Add front brake","Put a foot down"],a:1,e:"Once the rear is locked and out of line, keep it locked to a stop. Suddenly releasing it can cause a high-side."},
+  {q:"Carrying a passenger changes the bike's handling by:",o:["Making it accelerate faster","Slowing acceleration and lengthening stopping distance","Having no effect","Making it easier to balance at low speed"],a:1,e:"The extra weight means slower acceleration, longer stops, and different balance — ride smoother and leave more space."},
+  {q:"A passenger should:",o:["Lean into turns opposite the rider","Hold the rider's waist/hips, keep feet on the pegs, and lean with the rider","Hold the sissy bar and sit stiffly upright","Put their feet down at stops"],a:1,e:"Passengers hold the rider's waist (or grab rails), keep both feet on the pegs at all times, and lean with the bike as a unit."},
+  {q:"When carrying cargo, you should keep the load:",o:["High and toward the rear","Low and forward, secured tightly","Loose so it can shift","On the handlebars"],a:1,e:"Keep loads low and as far forward as practical, and tie them down so nothing shifts or fouls the controls."},
+  {q:"If the throttle sticks open, your first actions should be:",o:["Jump off the bike","Squeeze the clutch and hit the engine cut-off (kill) switch","Brake only and hope it clears","Shift to neutral and coast for miles"],a:1,e:"Twist the throttle back and forth first; if it stays stuck, pull in the clutch and use the engine cut-off switch, then brake."},
+  {q:"Riding at night, you should:",o:["Follow closer to use others' taillights","Increase following distance, use high beam when you can, and read the road with cars' lights ahead","Ride faster to get home sooner","Remove your face shield to see better"],a:1,e:"Reduced visibility at night means more following distance, more use of high beam, and using other vehicles' lights to preview the road."},
+  {q:"You choose a specific lane position mainly to:",o:["Show off","Maximize your visibility and keep a space cushion from hazards","Stay hidden from drivers","Ride on the painted lines"],a:1,e:"Position yourself to be seen and to keep space from cars, surface hazards, and blind spots — and change it as conditions change."},
+  {q:"Total stopping distance is made up of:",o:["Braking distance alone","Perception distance + reaction distance + braking distance","Only your reaction time","Engine size and gear"],a:1,e:"You travel during perception (seeing the hazard) and reaction (moving to the brakes) before braking even begins."},
+  {q:"When you approach a blind intersection where a car is waiting to pull out, the best move is to:",o:["Speed through before they move","Cover the brakes, slow, and pick a lane position that gives you the best view and lets them see you","Assume they saw you","Ride in their blind spot"],a:1,e:"Slow, cover your brakes, and be ready — a driver may not see you or may misjudge your speed. Position to be seen and to escape."},
+  {q:"Downshifting to a lower gear as you slow:",o:["Should never be done while braking","Lets the engine help slow you and keeps you in the right gear to accelerate away","Damages the transmission","Is only for racing"],a:1,e:"Shift down one gear at a time as you slow so engine braking helps and you can accelerate out of trouble if needed. Finish shifts before a corner."},
+  {q:"Before changing lanes you should:",o:["Just use your mirrors","Check mirrors AND turn your head to check the blind spot, then signal","Only signal","Change quickly so no one has time to react"],a:1,e:"Mirrors don't show the blind spot. Signal, check mirrors, and do a head-check turn before moving over."},
+  {q:"In rain, fog, at night, or when tired, your following distance should be:",o:["The same 2 seconds","Increased to 4 or more seconds","Reduced to save fuel","Zero — just keep up"],a:1,e:"Poor conditions cut traction and visibility, so open the gap to 4+ seconds to give yourself room."},
+  {q:"Eye or face protection is important because:",o:["It looks cool","Wind, bugs, and debris can blind you; a windshield alone isn't enough","It's only needed on the highway","It keeps you warm"],a:1,e:"A face shield or goggles protect against wind, insects, and road debris that could cause you to lose control. Sunglasses aren't enough at night."},
+  {q:"The safest riding pace is one where you can:",o:["Always beat the car next to you","Stop within the distance you can see to be clear","Lean the furthest in every curve","Keep the throttle wide open"],a:1,e:"Ride so you can always stop within your sight distance — never override what you can see and react to."},
+  {q:"Most motorcycle crashes happen:",o:["On the open highway","At or near intersections","In parking lots","On long straightaways"],a:1,e:"Intersections concentrate turning and crossing traffic, making them the most common crash location."},
+  {q:"When you enter a curve faster than you'd like, the best response is to:",o:["Grab the brakes and stand the bike up","Look through the turn and press harder to lean more","Close your eyes and hope","Shift up a gear"],a:1,e:"Trust the tires — look where you want to go and press to lean more. Panic-braking stands the bike up and runs you wide."},
+  {q:"You should use both brakes:",o:["Only in emergencies","Every time you slow or stop","Only the rear in the rain","Only the front on dry roads"],a:1,e:"Get in the habit of using both brakes every time — it maximizes braking and keeps the skill automatic for emergencies."},
+  {q:"Starting on an uphill, the technique is to:",o:["Rev high and dump the clutch","Use the friction zone and rear brake to hold, then ease out the clutch as you roll on throttle","Roll backward first","Use the front brake only while accelerating"],a:1,e:"Hold with the rear brake, find the friction zone, and smoothly trade brake for throttle so you don't roll back or stall."},
+  {q:"To be legal and far more visible in daylight, a motorcycle should:",o:["Keep its headlight on at all times","Only use lights after dark","Rely on reflectors alone","Flash the brake light constantly"],a:0,e:"A headlight on in daylight is one of the best (and usually required) ways to help drivers notice you."},
+  {q:"When you plan to stop, the safest habit is to:",o:["Coast in neutral to the stop","Stay in gear, brake with both, and keep the bike ready to move","Turn the engine off early","Put both feet down while still rolling"],a:1,e:"Brake with both, downshift so you're in first at the stop, and keep the clutch ready so you can pull away or escape."},
+  {q:"A good space cushion means:",o:["Riding bumper-to-bumper to save space","Keeping open room ahead, behind, and to the sides so you have an escape path","Always riding in the center of a pack","Matching the car beside you exactly"],a:1,e:"Space on all sides gives you time to see, room to maneuver, and an escape route when something goes wrong."},
+  {q:"The best strategy for surviving in traffic is to:",o:["Assume drivers see you and will yield","Ride as if you're invisible and always have an escape plan","Stay in blind spots so cars can't cut you off","Match traffic by tailgating"],a:1,e:"Ride like you're invisible: be ready for drivers to not see you, keep space, and always know where your out is."},
+];
+
+const CARDS = [
+  {t:"SEE",h:"tap to flip",b:"<b>Search, Evaluate, Execute.</b> Scan for hazards, judge what could go wrong, then act — a constant loop."},
+  {t:"T-CLOCS",h:"pre-ride check",b:"<b>T</b>ires · <b>C</b>ontrols · <b>L</b>ights · <b>O</b>il/fluids · <b>C</b>hassis · <b>S</b>tands. Your pre-ride inspection."},
+  {t:"FINE-C",h:"engine start",b:"<b>F</b>uel · <b>I</b>gnition · <b>N</b>eutral · <b>E</b>ngine cut-off to run · <b>C</b>hoke/Clutch. The start-up sequence."},
+  {t:"Slow·Look·Press·Roll",h:"cornering",b:"<b>Slow</b> before the curve · <b>Look</b> through it · <b>Press</b> to lean · <b>Roll</b> on throttle to stabilize."},
+];
+
+// ---- state ----
+let order=[], optOrder=[], idx=0, answers=[], mode="instant";
+const $=id=>document.getElementById(id);
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+
+function begin(){
+  mode=document.querySelector('input[name=mode]:checked').value;
+  const doShuffle=$("shuffle").checked;
+  order=QUESTIONS.map((_,i)=>i);
+  if(doShuffle) order=shuffle(order.slice());
+  optOrder=order.map(qi=>{
+    let idxs=QUESTIONS[qi].o.map((_,i)=>i);
+    if(doShuffle) idxs=shuffle(idxs.slice());
+    return idxs;
+  });
+  answers=new Array(order.length).fill(null);
+  idx=0;
+  show("quiz"); $("qTot").textContent=order.length; render();
+}
+
+function show(which){
+  for(const s of ["start","quiz","results","flash"]) $(s).hidden=(s!==which);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function render(){
+  const qi=order[idx], Q=QUESTIONS[qi], oo=optOrder[idx];
+  $("qNow").textContent=idx+1;
+  $("barFill").style.width=((idx)/order.length*100)+"%";
+  $("qTag").textContent="Question "+(idx+1);
+  $("qText").textContent=Q.q;
+  const answered=answers[idx]!==null;
+  // score-mini only in instant mode
+  if(mode==="instant"){
+    const done=answers.filter(a=>a!==null).length;
+    const right=answers.filter((a,i)=>a!==null&&a===QUESTIONS[order[i]].a).length;
+    $("scoreMini").textContent=done? right+" / "+done+" right":"";
+  } else $("scoreMini").textContent="";
+
+  const opts=$("opts"); opts.innerHTML="";
+  oo.forEach((origIndex,pos)=>{
+    const b=document.createElement("button");
+    b.className="opt"; b.type="button";
+    b.innerHTML='<span class="key">'+"ABCD"[pos]+'</span><span>'+Q.o[origIndex]+'</span>';
+    if(answered){
+      b.disabled=true;
+      if(origIndex===Q.a) b.classList.add("correct");
+      else if(origIndex===answers[idx]) b.classList.add("wrong");
+      else b.classList.add("dim");
+      if(mode!=="instant"){ // exam mode: no reveal, just show chosen
+        b.classList.remove("correct","wrong","dim");
+        if(origIndex===answers[idx]) b.classList.add("correct");
+      }
+    }
+    b.onclick=()=>choose(origIndex);
+    opts.appendChild(b);
+  });
+
+  const ex=$("explain");
+  ex.className="explain";
+  if(answered && mode==="instant"){
+    const ok=answers[idx]===Q.a;
+    ex.classList.add("show", ok?"ok":"no");
+    ex.querySelector(".verdict").textContent=ok?"✓ Correct":"✗ Not quite";
+    $("explainText").innerHTML=Q.e;
+  }
+  $("prevBtn").disabled=idx===0;
+  $("nextBtn").disabled=!answered;
+  $("nextBtn").textContent=(idx===order.length-1)?"See results →":"Next →";
+}
+
+function choose(origIndex){
+  if(answers[idx]!==null && mode==="instant") return; // lock after answer in learn mode
+  answers[idx]=origIndex;
+  render();
+}
+
+function next(){
+  if(answers[idx]===null) return;
+  if(idx===order.length-1){ finish(); return; }
+  idx++; render();
+}
+function prev(){ if(idx>0){ idx--; render(); } }
+
+function finish(){
+  const right=answers.reduce((n,a,i)=>n+(a===QUESTIONS[order[i]].a?1:0),0);
+  const total=order.length, pct=Math.round(right/total*100), pass=right>=40;
+  $("barFill").style.width="100%";
+  show("results");
+  $("rFrac").textContent=right+" / "+total;
+  // animate ring + pct
+  const arc=$("ringArc"), C=490;
+  arc.style.stroke = pass? "var(--good)":"var(--bad)";
+  requestAnimationFrame(()=>{ arc.style.transition="stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)"; arc.style.strokeDashoffset=String(C-(C*pct/100)); });
+  let cur=0; const step=()=>{ cur+=Math.max(1,Math.round(pct/28)); if(cur>=pct)cur=pct; $("rPct").textContent=cur+"%"; if(cur<pct)requestAnimationFrame(step); };
+  step();
+  const v=$("rVerdict");
+  v.textContent = pass? "You passed ✓":"Keep studying";
+  v.className="verdict-big "+(pass?"pass":"fail");
+  $("rMsg").textContent = pass
+    ? "You cleared the 40-of-50 bar. On the real test, keep the same pace — read every option before you pick."
+    : "You need 40 of 50 (80%) to pass. Review the misses below, flip the flash cards, and retake — the questions reshuffle each time.";
+
+  // review misses
+  const misses=[];
+  answers.forEach((a,i)=>{ const Q=QUESTIONS[order[i]]; if(a!==Q.a) misses.push({Q,a}); });
+  const rev=$("review"), list=$("reviewList"); list.innerHTML="";
+  if(misses.length){
+    rev.hidden=false;
+    $("reviewHead").textContent="Review your "+misses.length+" miss"+(misses.length>1?"es":"");
+    misses.forEach(({Q,a})=>{
+      const d=document.createElement("div"); d.className="rev-item";
+      d.innerHTML='<p class="rq">'+Q.q+'</p>'+
+        '<p class="ra you">Your answer: '+(a===null?"—":Q.o[a])+'</p>'+
+        '<p class="ra corr">Correct: <b>'+Q.o[Q.a]+'</b></p>'+
+        '<p class="ra">'+Q.e+'</p>';
+      list.appendChild(d);
+    });
+  } else { rev.hidden=false; $("reviewHead").textContent="Perfect score — nothing to review 🏁"; }
+}
+
+function buildCards(){
+  const g=$("fcGrid"); g.innerHTML="";
+  CARDS.forEach(c=>{
+    const btn=document.createElement("button");
+    btn.className="fcard"; btn.type="button"; btn.setAttribute("aria-pressed","false");
+    btn.innerHTML='<div class="fc-inner"><div class="fc-face fc-front"><div class="term">'+c.t+'</div><div class="hint">'+c.h+'</div></div>'+
+      '<div class="fc-face fc-back">'+c.b+'</div></div>';
+    btn.onclick=()=>btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed")==="true"?"false":"true");
+    g.appendChild(btn);
+  });
+}
+
+// theme toggle
+(function(){
+  const root=document.documentElement, b=$("themeBtn");
+  b.onclick=()=>{
+    const cur=root.getAttribute("data-theme");
+    const sysDark=matchMedia("(prefers-color-scheme:dark)").matches;
+    const next = cur ? (cur==="dark"?"light":"dark") : (sysDark?"light":"dark");
+    root.setAttribute("data-theme",next);
+  };
+})();
+
+// wire up
+$("startBtn").onclick=begin;
+$("nextBtn").onclick=next;
+$("prevBtn").onclick=prev;
+$("retryBtn").onclick=()=>show("start");
+$("toFlash").onclick=()=>{buildCards();show("flash");};
+$("reviewFlashBtn").onclick=()=>{buildCards();show("flash");};
+$("flashBack").onclick=()=>show("start");
+buildCards();
+</script>
