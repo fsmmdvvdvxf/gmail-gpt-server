@@ -2,29 +2,30 @@
   "name": "Nicole Fields Photography",
   "dba": "Nicole Fields Photography & Framing",
   "owner": "Nicole \"Nikki\" Fields",
-  "tagline": "Relaxed, natural photography for Chicagoland families.",
-  "description": "I'm Nikki — the photographer behind Nicole Fields Photography, based in West Chicago and serving families all around Chicagoland. My style is laid-back and unhurried: I take each session moment by moment and go with the flow, so it never feels rushed or stiff. The goal is simple — a session that's genuinely fun and relaxed, and photographs that look like the real, warm, everyday you.",
-  "about_long": "Photography is my form of personal expression, and my family is my whole heart — my husband and our two boys keep life joyful and a little chaotic in the best way. That's exactly the kind of real, in-between moment I love to capture for other families. I shoot on professional-grade Nikon equipment and I'm fully insured and registered with the State of Illinois, so you can relax and just be present while I do the rest.",
+  "tagline": "Relaxed, natural photography across Illinois.",
+  "description": "I'm Nikki — the photographer behind Nicole Fields Photography, based in Effingham, Illinois and available to travel for sessions across the state. My style is laid-back and unhurried: I take each session moment by moment and go with the flow, so it never feels rushed or stiff. The goal is simple — a session that's genuinely fun and relaxed, and photographs that look like the real, warm, everyday you.",
+  "about_long": "Photography is my form of personal expression, and my family is my whole heart — my husband and our two boys keep life joyful and a little chaotic in the best way. That's exactly the kind of real, in-between moment I love to capture for other families. I shoot on professional-grade Nikon equipment, so you can relax and just be present while I do the rest.",
   "brand": {
     "primary": "#e8735e",
     "secondary": "#6b8f9c",
     "confidence": "low",
     "favicon": "PENDING",
     "logo": "PENDING",
-    "notes": "No brand palette or logo was recoverable from the source site (parked/blocked). The liquid-glass palette here is a provisional design proposal — warm coral + soft slate over an airy aurora — pending owner sign-off."
+    "notes": "No brand palette or logo was recoverable (source site blocked in build env). Liquid-glass palette (coral + slate) is a provisional proposal pending owner sign-off."
   },
   "location": {
-    "city": "West Chicago",
+    "city": "Effingham",
     "state": "IL",
-    "region": "Chicagoland",
-    "service_area": "West Chicago and the greater Chicagoland suburbs; travel available on request.",
+    "region": "Central Illinois",
+    "service_area": "Based in Effingham, Illinois — available to travel for sessions across the state.",
     "address": "PENDING"
   },
   "contact": {
-    "email": "nicolefieldsphotos@gmail.com",
+    "email": "PENDING",
     "phone": "PENDING",
-    "instagram": "https://www.instagram.com/nicolefieldsphotos/",
-    "facebook": "https://www.facebook.com/nicolefieldsphotos/"
+    "instagram": "PENDING",
+    "facebook": "PENDING",
+    "_note": "Email/socials found via search were tied to a possibly-different 'Nicole Fields' (West Chicago). Left PENDING until confirmed from the owner's actual site so the site never asserts an unverified address."
   },
   "booking": {
     "url": "contact.html",
@@ -32,14 +33,15 @@
   },
   "credentials": [
     "Professional-grade Nikon equipment",
-    "Fully insured",
-    "Registered with the State of Illinois"
+    "Fully insured & registered in Illinois",
+    "Laid-back, never-rushed sessions",
+    "In-house custom framing"
   ],
   "services": [
     {
       "category": "Families & Lifestyle",
       "items": [
-        { "name": "Family sessions", "price": "PENDING", "duration": "≈ 1 hour", "description": "Relaxed, candid family photos in-home or on location around Chicagoland." },
+        { "name": "Family sessions", "price": "PENDING", "duration": "≈ 1 hour", "description": "Relaxed, candid family photos in-home or on location." },
         { "name": "Children", "price": "PENDING", "description": "Playful, natural portraits at your child's own pace." },
         { "name": "Maternity & Newborn", "price": "PENDING", "description": "Gentle maternity and newborn sessions capturing a brand-new chapter." }
       ]
@@ -79,6 +81,7 @@
     { "slug": "portfolio", "title": "Portfolio", "type": "gallery",          "nav": true,  "carry_over": true },
     { "slug": "about",     "title": "About",     "type": "single-service",   "nav": true,  "carry_over": true },
     { "slug": "services",  "title": "Services",  "type": "service-category", "nav": true,  "carry_over": true },
+    { "slug": "pricing",   "title": "Pricing",   "type": "single-service",   "nav": true,  "carry_over": true },
     { "slug": "contact",   "title": "Contact",   "type": "contact",          "nav": true,  "carry_over": true }
   ],
   "integrations": {
@@ -88,7 +91,7 @@
         "handler": "Netlify Function calling SendGrid API",
         "send_from": "forms@nicolefieldsphotography.net",
         "reply_to": "visitor's email",
-        "deliver_to": "nicolefieldsphotos@gmail.com",
+        "deliver_to": "PENDING — owner's confirmed inbox",
         "spam_protection": "honeypot + optional reCAPTCHA v3",
         "fields": ["first_name", "last_name", "email", "phone", "session_type", "message"]
       }

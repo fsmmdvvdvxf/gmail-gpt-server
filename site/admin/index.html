@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Owner Admin — Nicole Fields Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/skin.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e8735e'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='white' text-anchor='middle'%3ENF%3C/text%3E%3C/svg%3E" />
+  <script>(function(){var t=localStorage.getItem('nf-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>
+    .admin-wrap{max-width:860px;margin:0 auto;padding:0 20px 120px;}
+    .login{min-height:100vh;display:grid;place-items:center;padding:24px;}
+    .login .card{width:100%;max-width:420px;padding:38px 34px;text-align:center;}
+    .login h1{font-size:1.7rem;margin-bottom:6px;} .login p{font-size:.95rem;}
+    .topbar{position:sticky;top:0;z-index:50;margin:0 0 26px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:0 0 var(--radius) var(--radius);}
+    .topbar .t-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+    .topbar .save-state{font-size:.82rem;color:var(--ink-mute);}
+    .topbar .save-state.dirty{color:var(--accent-ink);font-weight:600;}
+    .topbar .save-state.ok{color:#2f7a49;} :root[data-theme="dark"] .topbar .save-state.ok{color:#8fd9a6;}
+    .a-head{padding:64px 0 22px;}
+    .a-head h1{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:4px;}
+    .a-head p{font-size:.98rem;margin:0;}
+    .sec{margin-bottom:16px;overflow:hidden;}
+    .sec-h{width:100%;display:flex;align-items:center;gap:14px;padding:20px 24px;background:none;border:0;cursor:pointer;text-align:left;color:var(--ink);}
+    .sec-h .s-ic{width:38px;height:38px;flex:none;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-ink);}
+    .sec-h .s-t{font-family:var(--serif);font-size:1.2rem;flex:1;}
+    .sec-h .s-sum{font-size:.82rem;color:var(--ink-mute);}
+    .sec-h .chev{transition:transform .3s var(--ease);color:var(--ink-mute);}
+    .sec.open .chev{transform:rotate(180deg);}
+    .sec-body{max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
+    .sec-body .inner{padding:4px 24px 26px;}
+    .a-field{margin-bottom:16px;}
+    .a-field label{display:block;font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:7px;}
+    .a-field input,.a-field textarea,.a-field select{width:100%;font-family:var(--sans);font-size:.98rem;color:var(--ink);background:color-mix(in srgb,var(--ground) 55%,transparent);border:1px solid var(--glass-edge);border-radius:12px;padding:12px 14px;}
+    .a-field input:focus,.a-field textarea:focus,.a-field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent);}
+    .a-field textarea{resize:vertical;min-height:90px;}
+    .a-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    @media (max-width:560px){.a-2{grid-template-columns:1fr;}}
+    .hint{font-size:.82rem;color:var(--ink-mute);margin:-8px 0 14px;}
+    .cat{border:1px solid var(--hairline);border-radius:16px;padding:16px;margin-bottom:14px;background:color-mix(in srgb,var(--ground) 40%,transparent);}
+    .cat-top{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+    .cat-top input{flex:1;font-weight:600;}
+    .item{display:grid;grid-template-columns:1fr 130px 130px auto;gap:8px;align-items:start;padding:8px 0;border-top:1px dashed var(--hairline);}
+    @media (max-width:640px){.item{grid-template-columns:1fr 1fr;}}
+    .item textarea{grid-column:1/-1;min-height:44px;}
+    .btn-sm{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-weight:600;font-size:.85rem;padding:9px 14px;border-radius:980px;border:1px solid var(--glass-edge);background:var(--glass);color:var(--ink);cursor:pointer;min-height:40px;transition:transform .2s var(--ease);}
+    .btn-sm:active{transform:scale(.96);}
+    .btn-sm.danger{color:#c0453c;border-color:color-mix(in srgb,#c0453c 40%,transparent);} :root[data-theme="dark"] .btn-sm.danger{color:#ff9d92;}
+    .btn-sm.add{border-style:dashed;color:var(--accent-ink);}
+    .icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--glass-edge);background:var(--glass);color:var(--ink-mute);cursor:pointer;display:grid;place-items:center;}
+    .icon-btn:hover{color:#c0453c;border-color:color-mix(in srgb,#c0453c 40%,transparent);}
+    .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--hairline);}
+    .toggle-row:last-child{border-bottom:0;}
+    .toggle-row .tr-t{font-weight:600;color:var(--ink);} .toggle-row .tr-d{font-size:.85rem;color:var(--ink-mute);}
+    .sw{position:relative;width:50px;height:29px;flex:none;}
+    .sw input{opacity:0;width:0;height:0;position:absolute;}
+    .sw span{position:absolute;inset:0;border-radius:980px;background:color-mix(in srgb,var(--ink) 18%,transparent);transition:background .25s;cursor:pointer;}
+    .sw span::before{content:"";position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s var(--ease);}
+    .sw input:checked + span{background:var(--accent);}
+    .sw input:checked + span::before{transform:translateX(21px);}
+    .confirm{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:#c0453c;} :root[data-theme="dark"] .confirm{color:#ff9d92;}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);z-index:200;padding:13px 22px;border-radius:980px;font-size:.92rem;font-weight:600;opacity:0;pointer-events:none;transition:all .3s var(--ease);}
+    .toast.show{opacity:1;transform:translateX(-50%);}
+    .toast.ok{background:#2f7a49;color:#fff;} .toast.err{background:#c0453c;color:#fff;}
+  </style>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span></div>
+
+  <!-- LOGIN -->
+  <div class="login" id="login">
+    <form class="glass card" id="loginForm">
+      <h1>Owner login</h1>
+      <p style="color:var(--ink-soft)">Enter your admin password to edit your website.</p>
+      <div class="a-field" style="text-align:left;margin-top:20px"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required></div>
+      <button type="submit" class="btn btn-accent" style="width:100%;justify-content:center">Unlock editor</button>
+      <p class="hint" style="margin-top:16px">Your password is set by your developer (the site's <code>ADMIN_KEY</code>). It's never stored in the website's code.</p>
+      <p style="margin-top:8px"><a href="../index.html" class="link-arrow" style="font-size:.9rem">← Back to site</a></p>
+    </form>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="editor" hidden>
+    <div class="admin-wrap">
+      <div class="topbar glass">
+        <div style="display:flex;align-items:center;gap:12px">
+          <strong style="font-family:var(--serif);font-size:1.05rem">Site editor</strong>
+          <span class="save-state" id="saveState">Loaded</span>
+        </div>
+        <div class="t-actions">
+          <a class="btn-sm" href="../index.html" target="_blank" rel="noopener">Preview site ↗</a>
+          <button class="btn-sm" id="logoutBtn" type="button">Lock</button>
+          <button class="btn btn-accent" id="saveBtn" type="button" style="min-height:44px">Save changes</button>
+        </div>
+      </div>
+
+      <div class="a-head">
+        <h1>Edit your website</h1>
+        <p style="color:var(--ink-soft)">Change anything here and hit <strong>Save changes</strong> — it updates the live site right away. No code, no rebuild.</p>
+      </div>
+
+      <div id="sections"></div>
+
+      <p class="hint" style="margin-top:20px">Tip: use <strong>Export</strong> in the Backup section to download a copy of all your content before big changes.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (function(){
+    "use strict";
+    var API="/api/content", KEYNAME="nf-admin-key", DRAFT="nf-admin-draft";
+    var state=null, dirty=false;
+
+    /* ---------- helpers ---------- */
+    function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]);}); }
+    function getPath(o,p){ return p.split(".").reduce(function(x,k){return x==null?undefined:x[k];},o); }
+    function setPath(o,p,v){ var ks=p.split("."),last=ks.pop(),t=ks.reduce(function(x,k){ if(x[k]==null)x[k]={}; return x[k]; },o); t[last]=v; }
+    function toast(msg,kind){ var t=document.getElementById("toast"); t.textContent=msg; t.className="toast show "+(kind||"ok"); setTimeout(function(){ t.className="toast"; },2600); }
+    function markDirty(){ dirty=true; var s=document.getElementById("saveState"); s.textContent="Unsaved changes"; s.className="save-state dirty"; localStorage.setItem(DRAFT,JSON.stringify(state)); }
+    function markSaved(){ dirty=false; var s=document.getElementById("saveState"); s.textContent="All changes saved"; s.className="save-state ok"; }
+
+    /* ---------- load ---------- */
+    async function loadContent(){
+      var draft=localStorage.getItem(DRAFT);
+      if(draft){ try { return JSON.parse(draft); } catch(e){} }
+      try { var r=await fetch(API,{cache:"no-store"}); if(r.ok){ var j=await r.json(); if(j&&j.data) return j.data; } } catch(e){}
+      try { var r2=await fetch("../business.json"); return await r2.json(); } catch(e){}
+      return { name:"Nicole Fields Photography", services:[] };
+    }
+
+    /* ---------- sections ---------- */
+    var ICON={ info:'<path d="M12 16v-5M12 8h.01"/><circle cx="12" cy="12" r="9"/>', pin:'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', cam:'<path d="M4 20V8a2 2 0 0 1 2-2h2l1.5-2h5L18 6a2 2 0 0 1 2 2v12z"/><circle cx="12" cy="13" r="3.4"/>', eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>', save:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>' };
+    function field(label,path,type,hint){
+      var v=getPath(state,path); if(v==null||(""+v).indexOf("PENDING")===0) v="";
+      var input = type==="textarea"
+        ? '<textarea data-path="'+path+'">'+esc(v)+'</textarea>'
+        : '<input type="'+(type||"text")+'" data-path="'+path+'" value="'+esc(v)+'">';
+      return '<div class="a-field"><label>'+esc(label)+'</label>'+input+(hint?'<div class="hint" style="margin:6px 0 0">'+esc(hint)+'</div>':'')+'</div>';
+    }
+    function secWrap(id,icon,title,summary,inner,open){
+      return '<div class="glass sec'+(open?' open':'')+'" data-sec="'+id+'">'+
+        '<button class="sec-h" type="button"><span class="s-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+icon+'</svg></span>'+
+        '<span class="s-t">'+esc(title)+'</span><span class="s-sum">'+esc(summary||"")+'</span>'+
+        '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>'+
+        '<div class="sec-body"><div class="inner">'+inner+'</div></div></div>';
+    }
+
+    function servicesEditor(){
+      var cats=state.services||[];
+      var html=cats.map(function(cat,ci){
+        var items=(cat.items||[]).map(function(it,ii){
+          return '<div class="item" data-ci="'+ci+'" data-ii="'+ii+'">'+
+            '<div class="a-field" style="margin:0"><label>Name</label><input data-svc="'+ci+'.'+ii+'.name" value="'+esc(it.name)+'"></div>'+
+            '<div class="a-field" style="margin:0"><label>Price</label><input data-svc="'+ci+'.'+ii+'.price" value="'+esc((""+(it.price||"")).indexOf("PENDING")===0?"":it.price)+'" placeholder="e.g. $250"></div>'+
+            '<div class="a-field" style="margin:0"><label>Length</label><input data-svc="'+ci+'.'+ii+'.duration" value="'+esc((""+(it.duration||"")).indexOf("PENDING")===0?"":(it.duration||""))+'" placeholder="≈ 1 hr"></div>'+
+            '<button class="icon-btn" type="button" data-act="del-item" data-ci="'+ci+'" data-ii="'+ii+'" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'+
+            '<div class="a-field" style="margin:0"><textarea data-svc="'+ci+'.'+ii+'.description" placeholder="Short description">'+esc(it.description||"")+'</textarea></div>'+
+          '</div>';
+        }).join("");
+        return '<div class="cat" data-ci="'+ci+'">'+
+          '<div class="cat-top"><input data-cat="'+ci+'" value="'+esc(cat.category)+'" placeholder="Category name">'+
+          '<button class="btn-sm danger" type="button" data-act="del-cat" data-ci="'+ci+'">Remove group</button></div>'+
+          items+
+          '<button class="btn-sm add" type="button" data-act="add-item" data-ci="'+ci+'" style="margin-top:10px">＋ Add a service</button>'+
+        '</div>';
+      }).join("");
+      html+='<button class="btn-sm add" type="button" data-act="add-cat">＋ Add a service group</button>';
+      return html;
+    }
+
+    function render(){
+      var s=state, sec="";
+      sec+=secWrap("biz",ICON.info,"Business & story","Name, tagline, about",
+        field("Business name","name")+field("Tagline (one line)","tagline")+
+        field("Short intro (shown on the homepage)","description","textarea")+
+        field("Longer about / your story","about_long","textarea"), true);
+      sec+=secWrap("loc",ICON.pin,"Location & area", (s.location&&s.location.city)||"",
+        '<div class="a-2">'+field("City","location.city")+field("State","location.state")+'</div>'+
+        field("Region","location.region")+field("Service area (one line)","location.service_area"));
+      sec+=secWrap("contact",ICON.mail,"Contact & social","How people reach you",
+        '<div class="hint" style="margin:0 0 14px">Fill these in to show them on the site. Leave blank to hide.</div>'+
+        '<div class="a-2">'+field("Email","contact.email","email")+field("Phone","contact.phone")+'</div>'+
+        '<div class="a-2">'+field("Instagram URL","contact.instagram")+field("Facebook URL","contact.facebook")+'</div>'+
+        field("How booking works","booking.process","textarea"));
+      sec+=secWrap("svc",ICON.cam,"Services","What you photograph",
+        '<div class="hint" style="margin:0 0 14px">Add, edit, or remove what you offer. Leave price blank to show "Inquire".</div>'+
+        '<div id="svcEditor">'+servicesEditor()+'</div>');
+      sec+=secWrap("disp",ICON.eye,"Show / hide sections","Reviews, hours, rating",
+        toggleRow("google.display.show_hours","Business hours","Show a weekly hours block in the footer.")+
+        toggleRow("google.display.show_rating_badge","Google rating badge","Show your Google star rating (once connected).")+
+        toggleRow("google.display.reviews.enabled","Reviews section","Turn the on-site reviews section on or off."));
+      sec+=secWrap("backup",ICON.save,"Backup & restore","Export / import your content",
+        '<p class="hint" style="margin-top:0">Download all your website content as a file, or restore from one.</p>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn-sm" type="button" id="exportBtn">⬇ Export content</button>'+
+        '<label class="btn-sm add" style="cursor:pointer">⬆ Import content<input type="file" id="importFile" accept="application/json" hidden></label>'+
+        '<button class="btn-sm danger" type="button" id="discardBtn">Discard local changes</button></div>');
+      document.getElementById("sections").innerHTML=sec;
+      wire();
+    }
+
+    function toggleRow(path,title,desc){
+      var on=!!getPath(state,path);
+      return '<div class="toggle-row"><div><div class="tr-t">'+esc(title)+'</div><div class="tr-d">'+esc(desc)+'</div></div>'+
+        '<label class="sw"><input type="checkbox" data-toggle="'+path+'"'+(on?" checked":"")+'><span></span></label></div>';
+    }
+
+    /* ---------- wiring ---------- */
+    function wire(){
+      // collapsible
+      document.querySelectorAll(".sec-h").forEach(function(h){ h.addEventListener("click",function(){
+        var sec=h.closest(".sec"), body=sec.querySelector(".sec-body");
+        var open=sec.classList.toggle("open"); body.style.maxHeight=open?body.scrollHeight+"px":"0px";
+      });});
+      // open the default-open one
+      document.querySelectorAll(".sec.open .sec-body").forEach(function(b){ b.style.maxHeight=b.scrollHeight+"px"; });
+      // text/textarea fields
+      document.querySelectorAll("[data-path]").forEach(function(el){ el.addEventListener("input",function(){ setPath(state,el.getAttribute("data-path"),el.value); markDirty(); }); });
+      // toggles
+      document.querySelectorAll("[data-toggle]").forEach(function(el){ el.addEventListener("change",function(){ setPath(state,el.getAttribute("data-toggle"),el.checked); markDirty(); }); });
+      // services delegation
+      wireServices();
+      // backup
+      document.getElementById("exportBtn").addEventListener("click",exportJson);
+      document.getElementById("importFile").addEventListener("change",importJson);
+      document.getElementById("discardBtn").addEventListener("click",discard);
+    }
+
+    function refreshOpenHeights(){ document.querySelectorAll(".sec.open .sec-body").forEach(function(b){ b.style.maxHeight="none"; }); }
+
+    function wireServices(){
+      var root=document.getElementById("svcEditor"); if(!root) return;
+      root.querySelectorAll("[data-svc]").forEach(function(el){ el.addEventListener("input",function(){
+        var p=el.getAttribute("data-svc").split("."), ci=+p[0], ii=+p[1], key=p[2];
+        state.services[ci].items[ii][key]=el.value; markDirty();
+      });});
+      root.querySelectorAll("[data-cat]").forEach(function(el){ el.addEventListener("input",function(){ state.services[+el.getAttribute("data-cat")].category=el.value; markDirty(); });});
+      root.querySelectorAll("[data-act]").forEach(function(btn){ btn.addEventListener("click",function(){
+        var act=btn.getAttribute("data-act"), ci=+btn.getAttribute("data-ci"), ii=+btn.getAttribute("data-ii");
+        if(act==="add-cat"){ state.services.push({category:"New group",items:[{name:"New service",price:"",description:""}]}); }
+        else if(act==="del-cat"){ if(!confirmBtn(btn)) return; state.services.splice(ci,1); }
+        else if(act==="add-item"){ state.services[ci].items.push({name:"New service",price:"",description:""}); }
+        else if(act==="del-item"){ state.services[ci].items.splice(ii,1); }
+        markDirty(); root.innerHTML=servicesEditor(); wireServices(); refreshOpenHeights();
+      });});
+    }
+
+    // inline confirm for destructive: first click arms, second within 3s confirms
+    var armed=null;
+    function confirmBtn(btn){
+      if(armed===btn){ armed=null; return true; }
+      armed=btn; var orig=btn.textContent; btn.textContent="Sure? Click again";
+      setTimeout(function(){ if(armed===btn){ armed=null; btn.textContent=orig; } },3000);
+      return false;
+    }
+
+    /* ---------- save / backup ---------- */
+    async function save(){
+      var key=sessionStorage.getItem(KEYNAME);
+      var btn=document.getElementById("saveBtn"); btn.disabled=true; var o=btn.textContent; btn.textContent="Saving…";
+      try {
+        var r=await fetch(API,{ method:"POST", headers:{"Content-Type":"application/json","x-admin-key":key||""}, body:JSON.stringify(state) });
+        var j=await r.json().catch(function(){return {};});
+        if(r.ok){ markSaved(); localStorage.removeItem(DRAFT); toast("Saved — your site is updated.","ok"); }
+        else if(r.status===401){ toast("Wrong password — re-enter it.","err"); sessionStorage.removeItem(KEYNAME); setTimeout(function(){location.reload();},1200); }
+        else if(r.status===503){ toast("Editing backend isn't set up yet (needs ADMIN_KEY). Your changes are saved locally.","err"); }
+        else { toast(j.error||"Couldn't save. Changes kept locally.","err"); }
+      } catch(e){ toast("Offline — changes kept locally on this device.","err"); }
+      finally { btn.disabled=false; btn.textContent=o; }
+    }
+    function exportJson(){
+      var blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+      var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="business.json"; a.click(); URL.revokeObjectURL(a.href);
+      toast("Downloaded business.json","ok");
+    }
+    function importJson(e){
+      var f=e.target.files[0]; if(!f) return; var rd=new FileReader();
+      rd.onload=function(){ try { var d=JSON.parse(rd.result); if(!d.name) throw 0; state=d; markDirty(); render(); toast("Imported — review, then Save.","ok"); } catch(err){ toast("That file isn't valid site content.","err"); } };
+      rd.readAsText(f);
+    }
+    async function discard(){
+      if(!confirm("Discard local changes and reload the last saved version?")) return;
+      localStorage.removeItem(DRAFT); state=await loadContentServerFirst(); render(); markSaved(); document.getElementById("saveState").textContent="Reloaded"; document.getElementById("saveState").className="save-state";
+    }
+    async function loadContentServerFirst(){
+      try { var r=await fetch(API,{cache:"no-store"}); if(r.ok){ var j=await r.json(); if(j&&j.data) return j.data; } } catch(e){}
+      try { var r2=await fetch("../business.json"); return await r2.json(); } catch(e){}
+      return { name:"Nicole Fields Photography", services:[] };
+    }
+
+    /* ---------- boot ---------- */
+    document.getElementById("loginForm").addEventListener("submit",function(e){ e.preventDefault();
+      var pw=document.getElementById("pw").value.trim(); if(!pw) return;
+      sessionStorage.setItem(KEYNAME,pw); startEditor();
+    });
+    document.getElementById("logoutBtn").addEventListener("click",function(){ sessionStorage.removeItem(KEYNAME); location.reload(); });
+    document.getElementById("saveBtn").addEventListener("click",save);
+
+    async function startEditor(){
+      document.getElementById("login").style.display="none";
+      var ed=document.getElementById("editor"); ed.hidden=false;
+      state=await loadContent();
+      render();
+      if(localStorage.getItem(DRAFT)){ markDirty(); document.getElementById("saveState").textContent="Unsaved local changes"; }
+      else markSaved();
+    }
+
+    if(sessionStorage.getItem(KEYNAME)) startEditor();
+  })();
+  </script>
+</body>
+</html>

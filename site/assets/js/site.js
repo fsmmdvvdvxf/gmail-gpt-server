@@ -38,9 +38,10 @@
       var attr = el.getAttribute("data-attr");
       if(attr) el.setAttribute(attr, val); else el.textContent = val;
     });
-    document.querySelectorAll("[data-tel]").forEach(function(el){ var p=get(data,"contact.phone"); if(!isPending(p)) el.href="tel:"+String(p).replace(/[^0-9+]/g,""); else { var h=el.closest("[data-hide-if-empty]"); if(h) h.hidden=true; } });
-    document.querySelectorAll("[data-mailto]").forEach(function(el){ var m=get(data,"contact.email"); if(!isPending(m)) el.href="mailto:"+m; });
-    document.querySelectorAll("[data-href]").forEach(function(el){ var v=get(data, el.getAttribute("data-href")); if(!isPending(v)) el.href=v; });
+    var hideEmpty = function(el){ var h=el.closest("[data-hide-if-empty]"); if(h) h.hidden=true; else el.hidden=true; };
+    document.querySelectorAll("[data-tel]").forEach(function(el){ var p=get(data,"contact.phone"); if(!isPending(p)) el.href="tel:"+String(p).replace(/[^0-9+]/g,""); else hideEmpty(el); });
+    document.querySelectorAll("[data-mailto]").forEach(function(el){ var m=get(data,"contact.email"); if(!isPending(m)) el.href="mailto:"+m; else hideEmpty(el); });
+    document.querySelectorAll("[data-href]").forEach(function(el){ var v=get(data, el.getAttribute("data-href")); if(!isPending(v)) el.href=v; else hideEmpty(el); });
   }
 
   /* ---- 4. Gate sections on google.display ---- */
@@ -199,11 +200,16 @@
     });
   }
 
+  /* ---- Content source: owner edits (via /api/content) with static fallback ---- */
+  async function loadContent(){
+    try { var r=await fetch("/api/content",{cache:"no-store"}); if(r.ok){ var j=await r.json(); if(j && j.data) return j.data; } } catch(e){}
+    try { var r2=await fetch("business.json"); return await r2.json(); } catch(e){ return null; }
+  }
+
   /* ---- Boot ---- */
   document.addEventListener("DOMContentLoaded", async function(){
     await loadIncludes();
-    var data=null;
-    try { var r=await fetch("business.json"); data=await r.json(); } catch(e){ /* still render static */ }
+    var data=await loadContent();
     if(data){ bindFields(data); gateDisplay(data); renderServices(data); }
     buildGallery();
     initHeader(); initFilters(); initLightbox(); initFaq(); initForm(); initYear();

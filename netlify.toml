@@ -19,6 +19,11 @@
   to = "/.netlify/functions/contact"
   status = 200
 
+[[redirects]]
+  from = "/api/content"
+  to = "/.netlify/functions/content"
+  status = 200
+
 # Security headers.
 [[headers]]
   for = "/*"
