@@ -39,13 +39,21 @@ npx serve .          # or: python3 -m http.server 8000
 
 ## Deploy (Netlify)
 
+**One-click, Git-connected (recommended):** in Netlify, *Add new site → Import an
+existing project → GitHub* and pick this repo. The root `netlify.toml` sets
+`base = "site"`, so base/publish/functions are detected automatically — no build
+step, nothing to fill in.
+
+**Or via CLI:**
+
 ```bash
 cd site
 netlify deploy --prod
 ```
 
-`netlify.toml` sets the publish dir and wires `/api/contact` to the serverless
-function. To make the contact form send email, set these environment variables
+Both the root `netlify.toml` and `site/netlify.toml` set the publish dir and wire
+`/api/contact` to the serverless function (they're kept consistent so either
+deploy path behaves identically). To make the contact form send email, set these environment variables
 in the Netlify dashboard (never commit them):
 
 | Var | Purpose |
