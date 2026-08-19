@@ -200,6 +200,37 @@
     });
   }
 
+  /* ---- Ambient music (Web Audio, synthesized — no file, off by default) ---- */
+  function initSound(){
+    var btn=document.querySelector("[data-sound]"); if(!btn) return;
+    var lbl=btn.querySelector("[data-sound-label]");
+    var ctx, master, amp, started=false, playing=false;
+    function build(){
+      var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
+      ctx=new AC();
+      master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
+      amp=ctx.createGain(); amp.gain.value=1; amp.connect(master);
+      var filter=ctx.createBiquadFilter(); filter.type="lowpass"; filter.frequency.value=820; filter.Q.value=0.7; filter.connect(amp);
+      [110.00,164.81,220.00,277.18,329.63].forEach(function(f,i){
+        var o=ctx.createOscillator(); o.type=(i%2)?"sine":"triangle"; o.frequency.value=f; o.detune.value=(i-2)*3.5;
+        var g=ctx.createGain(); g.gain.value=0.13/(1+i*0.18);
+        o.connect(g); g.connect(filter); o.start();
+      });
+      var lfo=ctx.createOscillator(); lfo.frequency.value=0.045; var lg=ctx.createGain(); lg.gain.value=300; lfo.connect(lg); lg.connect(filter.frequency); lfo.start();
+      var tr=ctx.createOscillator(); tr.frequency.value=0.07; var tg=ctx.createGain(); tg.gain.value=0.06; tr.connect(tg); tg.connect(amp.gain); tr.start();
+      started=true; return true;
+    }
+    function on(){ if(!started && !build()) return; if(ctx.state==="suspended") ctx.resume();
+      master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0.11, ctx.currentTime+2.2);
+      playing=true; btn.classList.add("on"); btn.setAttribute("aria-pressed","true"); if(lbl) lbl.textContent="Music on"; try{localStorage.setItem("nf-sound","on");}catch(e){} }
+    function off(){ if(started){ master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setValueAtTime(master.gain.value, ctx.currentTime); master.gain.linearRampToValueAtTime(0, ctx.currentTime+1.0);}
+      playing=false; btn.classList.remove("on"); btn.setAttribute("aria-pressed","false"); if(lbl) lbl.textContent="Play music"; try{localStorage.setItem("nf-sound","off");}catch(e){} }
+    btn.addEventListener("click",function(){ playing?off():on(); });
+    var pref; try{ pref=localStorage.getItem("nf-sound")==="on"; }catch(e){ pref=false; }
+    if(pref){ var kick=function(){ on(); window.removeEventListener("pointerdown",kick); window.removeEventListener("keydown",kick); }; window.addEventListener("pointerdown",kick); window.addEventListener("keydown",kick); }
+  }
+
   /* ---- Content source: owner edits (via /api/content) with static fallback ---- */
   async function loadContent(){
     try { var r=await fetch("/api/content",{cache:"no-store"}); if(r.ok){ var j=await r.json(); if(j && j.data) return j.data; } } catch(e){}
@@ -212,7 +243,7 @@
     var data=await loadContent();
     if(data){ bindFields(data); gateDisplay(data); renderServices(data); }
     buildGallery();
-    initHeader(); initFilters(); initLightbox(); initFaq(); initForm(); initYear();
+    initHeader(); initFilters(); initLightbox(); initFaq(); initForm(); initYear(); initSound();
     paintAll(); initReveal();
     var rt; addEventListener("resize",function(){ clearTimeout(rt); rt=setTimeout(function(){ document.querySelectorAll("canvas[data-art='fill']").forEach(function(cv){ sizeFill(cv); paint(cv); }); },180); });
     root.dataset.ready="true";
