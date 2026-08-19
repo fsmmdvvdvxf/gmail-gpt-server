@@ -1,0 +1,38 @@
+name: Deploy site to GitHub Pages
+
+# One-time setup required first: repo Settings -> Pages ->
+# "Build and deployment" -> Source: "GitHub Actions".
+# Enabling Pages the first time is an owner-only permission the CI token lacks.
+# After that, run this workflow (Actions tab -> "Run workflow") or re-add the
+# push trigger below for continuous deploys.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

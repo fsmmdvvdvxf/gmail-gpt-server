@@ -1,0 +1,46 @@
+<!-- footer.html — client-side include. Hours + rating gate on google.display
+     (both off until owner provides data). Contact binds from business.json;
+     unconfirmed fields (email/phone/social = PENDING) hide gracefully. -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="glass inner">
+      <div class="ftop">
+        <div class="fbrand">
+          <b data-field="name">Nicole Fields Photography</b>
+          <p data-field="tagline">Relaxed, natural photography across Illinois.</p>
+          <div class="fsoc" data-hide-if-empty>
+            <a data-href="contact.instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+            <a data-href="contact.facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 8.5V7c0-.7.4-1 1.2-1H17V3h-2.5C11.9 3 11 4.5 11 6.6v1.9H9V12h2v9h3v-9h2.2l.5-3.5H14z" fill="currentColor" stroke="none"/></svg></a>
+          </div>
+        </div>
+
+        <div class="fcol">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+
+        <div class="fcol">
+          <h4>Get in touch</h4>
+          <a href="contact.html">Book a session</a>
+          <span data-hide-if-empty><a class="val" data-mailto href="#" data-field="contact.email"></a></span>
+          <span data-hide-if-empty><a class="val" data-tel href="#" data-field="contact.phone"></a></span>
+          <span class="val" data-field="location.service_area">Effingham, IL · available across Illinois</span>
+        </div>
+      </div>
+
+      <div class="fbot">
+        <p>&copy; <span data-year>2026</span> <span data-field="name">Nicole Fields Photography</span>. All rights reserved.</p>
+        <p><span data-field="location.city">Effingham</span>, <span data-field="location.state">IL</span> · <a href="admin/" style="color:var(--ink-mute)">Owner login</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="sound-btn" data-sound aria-pressed="false" title="Ambient music">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span data-sound-label>Play music</span>
+</button>

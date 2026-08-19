@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Nicole Fields Photography</title>
+  <meta name="description" content="Family, newborn, senior, engagement, wedding, headshot, and sports photography by Nicole 'Nikki' Fields — Effingham, Illinois & statewide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/skin.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e8735e'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='white' text-anchor='middle'%3ENF%3C/text%3E%3C/svg%3E" />
+  <script>(function(){var t=localStorage.getItem('nf-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body data-page="portfolio">
+  <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span></div>
+  <div data-include="partials/header.html"></div>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow rev">The portfolio</span>
+      <h1 class="rev d1">Real families, real moments</h1>
+      <p class="rev d2">Filter by the kind of session you're dreaming of. Tap any image to view it larger.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="wrap">
+      <div class="filters rev" data-filters>
+        <button class="fbtn active" data-filter="all">All</button>
+        <button class="fbtn" data-filter="families">Families</button>
+        <button class="fbtn" data-filter="children">Children</button>
+        <button class="fbtn" data-filter="newborn">Maternity &amp; Newborn</button>
+        <button class="fbtn" data-filter="seniors">Seniors</button>
+        <button class="fbtn" data-filter="engagements">Engagements</button>
+        <button class="fbtn" data-filter="weddings">Weddings</button>
+        <button class="fbtn" data-filter="headshots">Headshots</button>
+        <button class="fbtn" data-filter="sports">Sports &amp; Fitness</button>
+      </div>
+
+      <div class="masonry" id="gallery" data-lightbox
+        data-items="families:3:4, newborn:4:5, children:1:1, seniors:3:4, weddings:3:4, families:16:11, engagements:4:5, headshots:1:1, sports:4:3, families:3:4, newborn:1:1, seniors:4:5, weddings:16:11, children:3:4, engagements:3:4, sports:4:5"></div>
+
+      <p class="center" style="margin-top:40px;color:var(--ink-mute);font-size:.92rem">
+        Want to see a full gallery from a recent session? <a href="contact.html" style="color:var(--accent-ink);font-weight:600">Just ask</a> — I'm happy to share more.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="glass cta-band rev">
+        <div class="cta-inner">
+          <canvas data-art="fill" data-seed="12" aria-hidden="true"></canvas>
+          <h2>Picture your family here.</h2>
+          <p>Let's plan a relaxed session that actually feels like you.</p>
+          <a href="contact.html" class="btn btn-accent">Book a session <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-include="partials/footer.html"></div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

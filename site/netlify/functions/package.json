@@ -1,0 +1,8 @@
+{
+  "name": "nicole-fields-functions",
+  "private": true,
+  "description": "Serverless functions for the site: contact form + editable content store.",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}
